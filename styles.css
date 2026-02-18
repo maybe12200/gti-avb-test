@@ -1,0 +1,67 @@
+:root { font-family: system-ui,-apple-system,"Noto Sans TC",sans-serif; }
+body { margin:0; background:#0b1020; color:#eef2ff; }
+.wrap { max-width:780px; margin:0 auto; padding:18px; }
+.top { margin: 6px 0 14px; }
+.brand { font-weight: 800; letter-spacing:.3px; }
+.sub { opacity:.8; font-size: 14px; margin-top: 6px; }
+
+.card{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.hidden{ display:none; }
+
+.progress{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.track{ flex:1; height: 12px; background: rgba(255,255,255,.10); border-radius: 999px; overflow:hidden; }
+.bar{ height:100%; width:0%; background:#ffd36a; transition: width .2s; }
+.pct{ font-size: 13px; opacity:.8; min-width: 84px; text-align:right; }
+
+.phase{ font-size: 13px; opacity:.75; margin-bottom: 8px; }
+.qText{ font-size: 22px; line-height:1.35; margin: 8px 0 14px; }
+.choices{ display:grid; gap:10px; }
+.choice{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 12px;
+  cursor:pointer;
+}
+.choice.active{ outline: 2px solid #ffd36a; }
+.choice small{ display:block; opacity:.7; margin-top: 4px; }
+
+.actions{ display:flex; gap:10px; margin-top:14px; }
+.btn{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color:#eef2ff;
+  cursor:pointer;
+  flex:1;
+}
+.btn.primary{ background:#ffd36a; color:#1b1b1b; border-color: transparent; font-weight:800; }
+
+.grid{ display:grid; gap:12px; margin: 12px 0; }
+@media (min-width: 720px){ .grid{ grid-template-columns: 1fr 1fr; } }
+
+.metric .label{ font-size: 13px; opacity:.8; margin-bottom: 6px; }
+.meter{ height: 12px; background: rgba(255,255,255,.10); border-radius: 999px; overflow:hidden; }
+.fill{ height:100%; width: 50%; background:#ffd36a; }
+.hint{ margin-top: 6px; font-size: 13px; opacity:.85; }
+.oneLiner{ font-size: 16px; opacity:.95; }
+.fine{ font-size: 12px; opacity:.7; margin-top: 12px; line-height:1.6; }
+.clarity{ margin: 14px 0; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.10); }
+.share{ display:flex; gap:10px; margin-top: 10px; flex-wrap: wrap; }
+
+.badgeRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px; }
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 8px 10px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  font-size: 13px; font-weight: 700;
+}
+.badge.subtle{ font-weight:600; opacity:.9; }

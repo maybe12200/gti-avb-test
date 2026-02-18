@@ -1,0 +1,140 @@
+// bank.js
+// 維度代碼：RL, SE, HA, FG
+// 量尺：1~5；reverse=true 代表反向計分 => score = 6 - x
+// 注意：這份「完整版檔案」內建 GTI-12 + 自適應補問題庫（可擴充到 120 題上限）
+
+window.GTI_BANK = {
+  // GTI-12（每向度 3 題）
+  core12: [
+    // R/L
+    { id:"RL1", dim:"RL", reverse:false, text:"在人多的場合，我通常越聊越有精神。" },
+    { id:"RL3", dim:"RL", reverse:true,  text:"一天結束時，我更需要獨處才能恢復能量。" },
+    { id:"RL7", dim:"RL", reverse:false, text:"我喜歡在群體裡扮演「推動節奏」的角色。" },
+
+    // S/E（S 高代表象徵；reverse 用來拉回證據/細節）
+    { id:"SE1", dim:"SE", reverse:false, text:"我常被「如果……會怎樣」的可能性吸引。" },
+    { id:"SE3", dim:"SE", reverse:true,  text:"我做判斷時更重視可驗證的證據，而非直覺。" },
+    { id:"SE7", dim:"SE", reverse:false, text:"我會先抓住整體意義，再回頭補細節。" },
+
+    // H/A（H 高代表共感；reverse 拉回直接/論證）
+    { id:"HA1", dim:"HA", reverse:false, text:"即使不同意，我也會先讓對方感到被理解。" },
+    { id:"HA3", dim:"HA", reverse:true,  text:"我說話偏直接，覺得效率比感受更重要。" },
+    { id:"HA6", dim:"HA", reverse:false, text:"我容易察覺他人的情緒細節。" },
+
+    // F/G（G 高代表結構/盡責；reverse 拉回彈性/即興）
+    { id:"FG1", dim:"FG", reverse:false, text:"我習慣把事情拆成步驟並設定期限。" },
+    { id:"FG3", dim:"FG", reverse:true,  text:"我常在最後一刻才開始動手。" },
+    { id:"FG2", dim:"FG", reverse:false, text:"即使沒人監督，我也會把承諾完成。" },
+  ],
+
+  // 補問池：只會對「不確定的向度」抽題
+  pools: {
+    RL: [
+      {id:"RL2", dim:"RL", reverse:false, text:"我常主動開啟話題或把大家串起來。"},
+      {id:"RL4", dim:"RL", reverse:false, text:"面對問題，我傾向說出來討論，比自己悶著想更有效。"},
+      {id:"RL5", dim:"RL", reverse:true,  text:"長時間社交會讓我很耗電，即使對方是我喜歡的人。"},
+      {id:"RL6", dim:"RL", reverse:true,  text:"在陌生環境，我會先觀察一陣子才慢慢加入。"},
+      {id:"RL8", dim:"RL", reverse:true,  text:"我比較像「在內心整理好」才願意表達的人。"},
+      {id:"RL9", dim:"RL", reverse:false, text:"我想到好點子時，會立刻想找人分享與測試。"},
+      {id:"RL10",dim:"RL", reverse:true,  text:"我更喜歡一對一深聊，而不是多人熱鬧的互動。"},
+      {id:"RL11",dim:"RL", reverse:false, text:"我在團隊中常自動接下「把人拉到同一頻道」的工作。"},
+      {id:"RL12",dim:"RL", reverse:true,  text:"我需要長時間安靜，才會覺得自己回到狀態。"},
+      {id:"RL13",dim:"RL", reverse:false, text:"我喜歡即興互動，越有來回越有能量。"},
+      {id:"RL14",dim:"RL", reverse:true,  text:"我在社交場合常先聽別人說，等確定安全再開口。"},
+      {id:"RL15",dim:"RL", reverse:false, text:"我會主動把資源/人脈串起來，讓事情更快推進。"},
+      {id:"RL16",dim:"RL", reverse:true,  text:"人多時我容易分心耗能，寧願晚點再回覆。"},
+      {id:"RL17",dim:"RL", reverse:false, text:"我喜歡把氛圍炒熱，讓大家更願意參與。"},
+      {id:"RL18",dim:"RL", reverse:true,  text:"我不太喜歡被即時回應壓著走，更習慣慢慢想。"},
+      {id:"RL19",dim:"RL", reverse:false, text:"遇到卡關時，我會先找人討論而不是自己硬撐。"},
+      {id:"RL20",dim:"RL", reverse:true,  text:"我把「獨處」當成必要的充電，不是可有可無。"},
+      {id:"RL21",dim:"RL", reverse:false, text:"我通常能在新群體中很快找到自己的位置。"},
+      {id:"RL22",dim:"RL", reverse:true,  text:"我更偏好用文字整理想法，再決定要不要說。"},
+      {id:"RL23",dim:"RL", reverse:false, text:"我容易被人群的動能帶起來，越多人越有勁。"},
+      {id:"RL24",dim:"RL", reverse:true,  text:"我更享受低刺激環境（少人、安靜、可控）。"},
+      {id:"RL25",dim:"RL", reverse:false, text:"我常在互動中越想越清楚，而不是先想好再說。"},
+      {id:"RL26",dim:"RL", reverse:true,  text:"我喜歡先把想法在心裡走過一遍，再對外說。"},
+      {id:"RL27",dim:"RL", reverse:false, text:"我願意當第一個開口的人，讓場子動起來。"},
+    ],
+
+    SE: [
+      {id:"SE2", dim:"SE", reverse:false, text:"我喜歡用隱喻、象徵或故事去理解人與事件。"},
+      {id:"SE4", dim:"SE", reverse:false, text:"我常把看似無關的事連在一起，形成新的想法。"},
+      {id:"SE5", dim:"SE", reverse:true,  text:"我偏好按既有經驗做事，不太想嘗試新方法。"},
+      {id:"SE6", dim:"SE", reverse:true,  text:"比起概念，我更在意「細節是否到位」。"},
+      {id:"SE8", dim:"SE", reverse:true,  text:"對我而言，務實可落地比浪漫想像更重要。"},
+      {id:"SE9", dim:"SE", reverse:false, text:"我常被抽象問題吸引（例如人性、意義、可能世界）。"},
+      {id:"SE10",dim:"SE", reverse:true,  text:"做決定時，我需要看到明確數據或具體證據才安心。"},
+      {id:"SE11",dim:"SE", reverse:false, text:"我喜歡在腦中先描繪藍圖，再慢慢找方法靠近。"},
+      {id:"SE12",dim:"SE", reverse:true,  text:"我更信任可重現的流程，而不是「感覺對了」。"},
+      {id:"SE13",dim:"SE", reverse:false, text:"我會用不同角度重組資訊，找出新連結。"},
+      {id:"SE14",dim:"SE", reverse:true,  text:"我不太喜歡沒有明確用途的想像與發散。"},
+      {id:"SE15",dim:"SE", reverse:false, text:"我容易從一句話/一個畫面，聯想到背後的象徵意義。"},
+      {id:"SE16",dim:"SE", reverse:true,  text:"我更在乎事情「怎麼做」而不是「代表什麼」。"},
+      {id:"SE17",dim:"SE", reverse:false, text:"我喜歡探索新觀點，即使它會推翻我原本的想法。"},
+      {id:"SE18",dim:"SE", reverse:true,  text:"我比較務實：能用就好，不需要太多概念包裝。"},
+      {id:"SE19",dim:"SE", reverse:false, text:"我常提出不同可能性，讓討論不只剩一條路。"},
+      {id:"SE20",dim:"SE", reverse:true,  text:"我偏好按步就班把細節做完，再談更大的想像。"},
+      {id:"SE21",dim:"SE", reverse:false, text:"我會被「如果規則改寫會怎樣」這種問題點燃。"},
+      {id:"SE22",dim:"SE", reverse:true,  text:"我比較不愛冒險嘗試，覺得穩穩照規則做最好。"},
+      {id:"SE23",dim:"SE", reverse:false, text:"我喜歡用模型/框架理解世界，而不只靠經驗。"},
+      {id:"SE24",dim:"SE", reverse:true,  text:"我常覺得抽象討論浪費時間，先把事情做完比較重要。"},
+      {id:"SE25",dim:"SE", reverse:false, text:"我會先問「背後的模式是什麼」，再看細節。"},
+      {id:"SE26",dim:"SE", reverse:true,  text:"我對新點子通常保留，除非它已被驗證可行。"},
+      {id:"SE27",dim:"SE", reverse:false, text:"我喜歡把問題提升到原理層，重新定義它。"},
+    ],
+
+    HA: [
+      {id:"HA2", dim:"HA", reverse:false, text:"當朋友求助時，我多半先安放情緒再談方法。"},
+      {id:"HA4", dim:"HA", reverse:false, text:"做重大決定時，我很在意「心裡是否踏實」。"},
+      {id:"HA5", dim:"HA", reverse:true,  text:"我傾向先指出問題與邏輯漏洞，再談感受。"},
+      {id:"HA7", dim:"HA", reverse:false, text:"關係有張力時，我會優先想怎麼修復。"},
+      {id:"HA8", dim:"HA", reverse:true,  text:"我更欣賞有力的論證，而不是情緒表達。"},
+      {id:"HA9", dim:"HA", reverse:false, text:"我會留意別人的表情與語氣，來調整我的說法。"},
+      {id:"HA10",dim:"HA", reverse:true,  text:"我覺得把話說清楚比「顧及感受」更重要。"},
+      {id:"HA11",dim:"HA", reverse:false, text:"我願意花時間理解別人為什麼那樣做，而不是急著評價。"},
+      {id:"HA12",dim:"HA", reverse:true,  text:"我做決策時主要看成本效益，情感因素可先放旁邊。"},
+      {id:"HA13",dim:"HA", reverse:false, text:"我在乎「彼此都能接受」的解法，而不是單方勝出。"},
+      {id:"HA14",dim:"HA", reverse:true,  text:"我不太喜歡拐彎抹角，覺得直說比較有效率。"},
+      {id:"HA15",dim:"HA", reverse:false, text:"我很在意自己說的話會不會讓人覺得被尊重。"},
+      {id:"HA16",dim:"HA", reverse:true,  text:"我更重視邏輯一致性，不太吃「情緒訴求」。"},
+      {id:"HA17",dim:"HA", reverse:false, text:"即使我有道理，我也會先確認對方是否準備好聽。"},
+      {id:"HA18",dim:"HA", reverse:true,  text:"我覺得情緒只會干擾判斷，最好先壓下去再處理。"},
+      {id:"HA19",dim:"HA", reverse:false, text:"我能快速感覺到團隊氣氛變了，並想做點什麼修補。"},
+      {id:"HA20",dim:"HA", reverse:true,  text:"討論時我會追求最優解，即使它讓人不舒服。"},
+      {id:"HA21",dim:"HA", reverse:false, text:"我常把「人怎麼感受」放進決策條件裡。"},
+      {id:"HA22",dim:"HA", reverse:true,  text:"我比較相信制度/規則，而不是關係與共識。"},
+      {id:"HA23",dim:"HA", reverse:false, text:"我會主動確認別人的需要，而不是假設自己懂。"},
+      {id:"HA24",dim:"HA", reverse:true,  text:"我覺得溫柔不等於有效，必要時要硬起來推進。"},
+      {id:"HA25",dim:"HA", reverse:false, text:"遇到衝突時，我會先降低張力，再處理議題本身。"},
+      {id:"HA26",dim:"HA", reverse:true,  text:"我認為公平更重要，哪怕有人因此不開心。"},
+      {id:"HA27",dim:"HA", reverse:false, text:"我會自然去理解每個人的動機與處境。"},
+    ],
+
+    FG: [
+      {id:"FG4", dim:"FG", reverse:false, text:"我做事喜歡先規劃，再開始行動。"},
+      {id:"FG5", dim:"FG", reverse:true,  text:"我更喜歡保留彈性，邊做邊調整。"},
+      {id:"FG6", dim:"FG", reverse:true,  text:"規則或流程讓我覺得受限，我更相信當下判斷。"},
+      {id:"FG7", dim:"FG", reverse:false, text:"我會定期回顧進度並調整方法，而不是放著不管。"},
+      {id:"FG8", dim:"FG", reverse:true,  text:"面對變動，我通常能快速轉向，不太需要固定秩序。"},
+      {id:"FG9", dim:"FG", reverse:false, text:"我做事前會先把資源、時間、風險列清單。"},
+      {id:"FG10",dim:"FG", reverse:true,  text:"我喜歡把行程留白，臨場看狀況再決定。"},
+      {id:"FG11",dim:"FG", reverse:false, text:"我對「準時交付」很敏感，會提早預留緩衝。"},
+      {id:"FG12",dim:"FG", reverse:true,  text:"我常靠靈感衝刺，規劃太細會讓我卡住。"},
+      {id:"FG13",dim:"FG", reverse:false, text:"我會把大目標拆成里程碑，避免最後才爆炸。"},
+      {id:"FG14",dim:"FG", reverse:true,  text:"我覺得流程只是參考，真正重要的是速度與彈性。"},
+      {id:"FG15",dim:"FG", reverse:false, text:"我喜歡有固定節奏（例行、清單、追蹤）來維持狀態。"},
+      {id:"FG16",dim:"FG", reverse:true,  text:"我常邊做邊想，想到什麼就先試，不想被計畫綁住。"},
+      {id:"FG17",dim:"FG", reverse:false, text:"我會把承諾寫下來（行事曆/待辦），避免遺漏。"},
+      {id:"FG18",dim:"FG", reverse:true,  text:"我對規範要求不高，只要結果不差就行。"},
+      {id:"FG19",dim:"FG", reverse:false, text:"我對自己有一套標準，會用它檢查品質。"},
+      {id:"FG20",dim:"FG", reverse:true,  text:"我不喜歡被KPI追著跑，覺得那會壓縮創造力。"},
+      {id:"FG21",dim:"FG", reverse:false, text:"我會提前安排，讓事情在我掌控內。"},
+      {id:"FG22",dim:"FG", reverse:true,  text:"我更擅長即興應變，而不是長期規劃。"},
+      {id:"FG23",dim:"FG", reverse:false, text:"我會持續優化流程，讓自己越做越省力。"},
+      {id:"FG24",dim:"FG", reverse:true,  text:"我覺得把事情做完最重要，不必太講究步驟。"},
+      {id:"FG25",dim:"FG", reverse:false, text:"我會用清單/儀式把日子穩定下來。"},
+      {id:"FG26",dim:"FG", reverse:true,  text:"我討厭被行程綁住，更喜歡隨性與自由。"},
+      {id:"FG27",dim:"FG", reverse:false, text:"我寧可慢一點，也要把品質做到位。"},
+    ],
+  }
+};

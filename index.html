@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GTI—人類心理 A.V.B 測驗｜人格心理類型測驗</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">GTI—人類心理 A.V.B 測驗</div>
+      <div class="sub">人格心理類型測驗 · 先 12 題 · 邊界自動補問校準（最多 120 題）</div>
+    </header>
+
+    <section id="start" class="card">
+      <h1>找出你的心理類型：你如何感知、決策與行動</h1>
+      <p>先完成 12 題快速版；若你的分數落在邊界區，系統會自動補問校準，讓結果更穩、更像專業長版。</p>
+      <button id="btnStart" class="btn primary">開始測驗（GTI-12）</button>
+      <p class="fine">本測驗供自我理解與一般教育/娛樂用途，非醫療或心理診斷。</p>
+    </section>
+
+    <section id="quiz" class="card hidden" aria-live="polite">
+      <div class="progress">
+        <div class="track"><div id="bar" class="bar"></div></div>
+        <div id="pct" class="pct">0/12</div>
+      </div>
+
+      <div class="q">
+        <div id="phase" class="phase"></div>
+        <div id="qText" class="qText"></div>
+        <div id="choices" class="choices"></div>
+      </div>
+
+      <div class="actions">
+        <button id="btnBack" class="btn">← 上一題</button>
+        <button id="btnNext" class="btn primary">下一題 →</button>
+      </div>
+      <div id="micro" class="fine"></div>
+    </section>
+
+    <section id="result" class="card hidden">
+      <h2 id="rTitle"></h2>
+      <p id="rOneLiner" class="oneLiner"></p>
+
+      <div class="badgeRow">
+        <div class="badge" id="elementBadge"></div>
+        <div class="badge subtle" id="modeBadge"></div>
+        <div class="badge subtle" id="stabilityBadge"></div>
+      </div>
+
+      <div class="grid">
+        <div class="metric">
+          <div class="label">R/L（引力方向）</div>
+          <div class="meter"><div id="mRL" class="fill"></div></div>
+          <div id="tRL" class="hint"></div>
+        </div>
+        <div class="metric">
+          <div class="label">S/E（感知方式）</div>
+          <div class="meter"><div id="mSE" class="fill"></div></div>
+          <div id="tSE" class="hint"></div>
+        </div>
+        <div class="metric">
+          <div class="label">H/A（決策模式）</div>
+          <div class="meter"><div id="mHA" class="fill"></div></div>
+          <div id="tHA" class="hint"></div>
+        </div>
+        <div class="metric">
+          <div class="label">F/G（生活節奏）</div>
+          <div class="meter"><div id="mFG" class="fill"></div></div>
+          <div id="tFG" class="hint"></div>
+        </div>
+      </div>
+
+      <div class="clarity">
+        <div class="label">穩定度（Stability）</div>
+        <div id="clarityText" class="hint"></div>
+        <div class="fine" style="margin-top:8px;">你的結果不是標籤，而是心理運作的重心。</div>
+      </div>
+
+      <div class="share">
+        <button id="btnCopy" class="btn">複製分享文案</button>
+        <button id="btnRestart" class="btn primary">再測一次</button>
+      </div>
+
+      <details class="fine" style="margin-top:14px;">
+        <summary>什麼是 A.V.B？</summary>
+        <div style="margin-top:8px; line-height:1.7; opacity:.85;">
+          A — Attention（心理注意）：你傾向把注意力放在哪裡、如何組織經驗。<br/>
+          V — Volition（意志方向）：你在不確定時偏向的主動策略。<br/>
+          B — Behavioural Pattern（行為結構）：你把內在傾向轉為行動的方式。
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script src="bank.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
